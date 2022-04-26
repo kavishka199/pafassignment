@@ -11,7 +11,7 @@ public class connection {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/interruption", "root", "");
 			
 			//for testing
 			System.out.print("Successfully Connected");

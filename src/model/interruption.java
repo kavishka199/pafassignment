@@ -2,9 +2,9 @@ package model;
 
 import java.sql.*;
 
-public class inquiries {
+public class interruption {
 	
-	public String insertInquiries(String ID, String Type, String Date, String Description) {
+	public String insertInterruptions(String ID, String Name, String Date, String Add) {
 		
 		String output = "";
 		
@@ -20,15 +20,15 @@ public class inquiries {
 				
 			}
 			
-			String query = "insert into inquiries values ( ?, ?, ?, ?)";
+			String query = "insert into interruption values ( ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = con1.prepareStatement(query);
 			
 			//binding values
 			preparedStmt.setString(1,ID);
-			preparedStmt.setString(2,Type);
+			preparedStmt.setString(2,Name);
 			preparedStmt.setString(3,Date);
-			preparedStmt.setString(4,Description);
+			preparedStmt.setString(4,Add);
 			
 			//execute the statement
 			preparedStmt.execute();
@@ -48,7 +48,7 @@ public class inquiries {
 		
 	}
 	
-	public String readInquiries() {
+	public String readInterruptions() {
 		
 		String output = "";
 		
@@ -67,32 +67,32 @@ public class inquiries {
 			//HTML table
 			output = "<table border=\"1\">\r\n"
 					+ "		<tr>\r\n"
-					+ "			<th>Inquiry ID</th><th>Inquiry Type</th><th>Inquiry Date</th><th>Inquiry Description</th><th>Update</th><th>Remove</th>\r\n"
+					+ "			<th>Interruption ID</th><th>Interruption Name</th><th>Interruption Date</th><th>Interruption Add</th><th>Update</th><th>Remove</th>\r\n"
 					+ "		</tr>";
 			
-			String query = "select * from inquiries";
+			String query = "select * from interruption";
 			Statement stmt = con1.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while (rs.next()) {
 				
-				String inquiryID = Integer.toString(rs.getInt("inquiryID"));
-				String inquiryType = rs.getString("inquiryType");
-				String inquiryDate = rs.getString("inquiryDate");
-				String inquiryDescription = Double.toString(rs.getDouble("inquiryDescription"));
+				String interruptionID = Integer.toString(rs.getInt("interruptionID"));
+				String interruptionName = rs.getString("interruptionName");
+				String interruptionDate = rs.getString("interruptionDate");
+				String interruptionAdd = Double.toString(rs.getDouble("interruptionAdd"));
 				
 				//add a row into the html table
-				output += "<tr>"+ "<td>" +inquiryID+ "</td><td>" +inquiryType+ "</td><td>" +inquiryDate+ "</td><td>" +inquiryDescription+ "</td>"
+				output += "<tr>"+ "<td>" +interruptionID+ "</td><td>" +interruptionName+ "</td><td>" +interruptionDate+ "</td><td>" +interruptionAdd+ "</td>"
 				+ "<td><form method='post' action='Home.jsp'>"
 				+ "<input name='btnUpdate' type='submit' value='Update'>"
-				+ "<input name='inquiryID' type='hidden' value='"+inquiryID+"'>"
-						+ "<input name='inquiryType' type='hidden' value='"+inquiryType+"'>"
-								+ "<input name='inquiryDate' type='hidden' value='"+inquiryDate+"'>"
-										+ "<input name='inquiryDescription' type='hidden' value='"+inquiryDescription+"'>"
+				+ "<input name='interruptionID' type='hidden' value='"+interruptionID+"'>"
+						+ "<input name='interruptionName' type='hidden' value='"+interruptionName+"'>"
+								+ "<input name='interruptionDate' type='hidden' value='"+interruptionDate+"'>"
+										+ "<input name='interruptionAdd' type='hidden' value='"+interruptionAdd+"'>"
 												+ "</form></td>"+ "<td><form method='post' action='Home.jsp'>"
 														+ "<input name='btnRemove' type='submit' value='Remove'>"
-														+ "<input name='inquiryID' type='hidden' value='"+inquiryID+"'>"
-																+ "<input name='inquiryType' type='hidden' value='"+inquiryType+"'>"
+														+ "<input name='interruptionID' type='hidden' value='"+interruptionID+"'>"
+																+ "<input name='interruptionName' type='hidden' value='"+interruptionName+"'>"
 																		+ "</form></td>"+ "</tr>";
 				
 			}
@@ -107,7 +107,7 @@ public class inquiries {
 		}
 		catch(Exception e) {
 			
-			output = "Error while reading the inquiries";
+			output = "Error while reading the interruption";
 			System.err.println(e.getMessage());
 			
 		}
@@ -116,7 +116,7 @@ public class inquiries {
 		
 	}
 	
-	public String updateInquiry(String ID, String Type, String Date, String Description) {
+	public String updateInterruption(String ID, String Name, String Date, String Add) {
 		
 		String output = "";
 		
@@ -132,15 +132,15 @@ public class inquiries {
 				
 			}
 			
-			String query = "update inquiries set inquiryID=?, inquiryType=?, inquiryDate=?, inquiryDescription=? where inquiryID=?";
+			String query = "update interruption set interruptionID=?, interruptionName=?, interruptionDate=?, interruptionAdd=? where interruptionID=?";
 			
 			PreparedStatement preparedStmt = con1.prepareStatement(query);
 			
 			//binding values
 			preparedStmt.setString(1,ID);
-			preparedStmt.setString(2,Type);
+			preparedStmt.setString(2,Name);
 			preparedStmt.setString(3,Date);
-			preparedStmt.setString(4,Description);
+			preparedStmt.setString(4,Add);
 			preparedStmt.setInt(5, Integer.parseInt(ID));
 			
 			//execute the statement
@@ -161,7 +161,7 @@ public class inquiries {
 		
 	}
 	
-	public String deleteInquiry(String inquiryID) {
+	public String deleteInterruption(String interruptionID) {
 		
 		String output = "";
 		
@@ -177,12 +177,12 @@ public class inquiries {
 				
 			}
 			
-			String query = "delete from inquiries where inquiryID=?";
+			String query = "delete from interruption where interruptionID=?";
 			
 			PreparedStatement preparedStmt = con1.prepareStatement(query);
 			
 			//binding values
-			preparedStmt.setInt(1,Integer.parseInt(inquiryID));
+			preparedStmt.setInt(1,Integer.parseInt(interruptionID));
 			
 			//execute the statement
 			preparedStmt.execute();
